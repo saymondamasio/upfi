@@ -14,6 +14,9 @@ export const theme = extendTheme({
       '800': '#353431',
       '900': '#1B1A18',
     },
+    orange: {
+      '500': '#DD6B20',
+    },
   },
   fonts: {
     heading: 'Roboto',
