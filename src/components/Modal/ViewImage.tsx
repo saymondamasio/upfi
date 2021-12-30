@@ -30,7 +30,7 @@ export function ModalViewImage({
         </ModalBody>
         <ModalFooter bgColor="gray.800">
           <Link mr="auto" href={imgUrl} isExternal>
-            Abrir Original
+            Abrir original
           </Link>
         </ModalFooter>
       </ModalContent>

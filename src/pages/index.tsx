@@ -32,7 +32,7 @@ export default function Home(): JSX.Element {
     'images',
     // TODO AXIOS REQUEST WITH PARAM
     async ({ pageParam = null }): Promise<Page> => {
-      const response = await api.get('images', {
+      const response = await api.get('api/images', {
         params: {
           after: pageParam,
         },
@@ -42,7 +42,7 @@ export default function Home(): JSX.Element {
     },
     // TODO GET AND RETURN NEXT PAGE PARAM
     {
-      getNextPageParam: lastPage => (lastPage.after ? lastPage.after : null),
+      getNextPageParam: lastPage => lastPage.after ?? null,
     }
   );
 
@@ -73,9 +73,11 @@ export default function Home(): JSX.Element {
           <Button
             mt="10"
             disabled={isFetchingNextPage}
+            isLoading={isFetchingNextPage}
             onClick={() => fetchNextPage()}
+            loadingText="Carregando..."
           >
-            {isFetchingNextPage ? 'Carregando...' : 'Carregar mais'}
+            Carregar mais
           </Button>
         )}
       </Box>

@@ -20,11 +20,12 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
       // TODO REQUIRED, LESS THAN 10 MB AND ACCEPTED FORMATS VALIDATIONS
       required: 'Arquivo obrigatório',
       validate: {
-        lessThan10MB: value => Number(value[0].size) < 10 * 1024 * 1024,
+        lessThan10MB: value =>
+          Number(value[0].size) < 10 * 1024 * 1024 ||
+          'O arquivo deve ser menor que 10MB',
         acceptedFormats: value =>
-          !/^image\/(jpeg|png|gif)$/i.test(value[0].type)
-            ? 'Somente são aceitos arquivos PNG, JPEG e GIF'
-            : undefined,
+          /^image\/(jpeg|png|gif)$/i.test(value[0].type) ||
+          'Somente são aceitos arquivos PNG, JPEG e GIF',
       },
     },
     title: {
@@ -53,7 +54,7 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
   const mutation = useMutation(
     // TODO MUTATION API POST REQUEST,
     async (data: Record<string, unknown>) => {
-      await api.post('/images', {
+      await api.post('api/images', {
         title: data.title,
         description: data.description,
         url: imageUrl,
